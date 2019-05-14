@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
-  overview: MyString
-  release_date: MyString
-  inventory: 1
+  title: "It"
+  overview: "a creepy clown scares some kids"
+  release_date: "2017"
+  inventory: 5
 
 two:
-  title: MyString
-  overview: MyString
-  release_date: MyString
-  inventory: 1
+  title: "Hot Fuzz"
+  overview: "a big time London police officer moves to a small town"
+  release_date: "2007"
+  inventory: 3
