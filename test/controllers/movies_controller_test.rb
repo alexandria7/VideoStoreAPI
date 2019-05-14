@@ -1,6 +1,7 @@
 require "test_helper"
 
 describe MoviesController do
+  let(:movie) { movies(:one) }
   describe "index" do
     it "should get index" do
       get movies_path
@@ -36,11 +37,19 @@ describe MoviesController do
       end
     end
   end
-  # it "should get show" do
-  #   get movies_show_url
-  #   value(response).must_be :success?
-  # end
 
+  describe "show" do
+    it "should get show" do
+      get movie_path(movie.id)
+      must_respond_with :success
+    end
+
+    it "returns 404:not_found for an invalid movie" do
+      get movie_path("invalid_id")
+
+      must_respond_with :not_found
+    end
+  end
   # it "should get create" do
   #   get movies_create_url
   #   value(response).must_be :success?
