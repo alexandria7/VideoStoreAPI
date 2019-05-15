@@ -32,18 +32,14 @@ describe Movie do
   end
 
   describe "relationships" do
-    # it "has many rentals" do
-    #   rentals = Rental.where(movie_id: movie.id)
-    #   rentals.must_respond_to :movie
-    #   movie.must_respond_to :rentals
+    it "has associated rentals" do
+      expect(movie).must_respond_to :rentals
+      expect(movie.rentals).must_include rental
+    end
 
-    #   rentals.first.must_be_kind_of Rental
-    # end
-
-    # it "has many products through order_items" do
-    #   results = OrderItem.where(order_id: order.id)
-    #   results.first.must_respond_to :product
-    #   results.first.product.must_be_kind_of Product
-    # end
+    it "has associated customers through rentals" do
+      expect(movie).must_respond_to :customers
+      expect(movie.customers).must_include customer
+    end
   end
 end
