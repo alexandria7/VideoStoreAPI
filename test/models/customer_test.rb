@@ -7,15 +7,12 @@ describe Customer do
     expect(customer.valid?).must_equal true
   end
 
-  it "requires name, registered_at, address, city, state, postal_code, phone" do
-    required_fields = [:name, :registered_at, :address, :city, :state, :postal_code, :phone]
-
-    required_fields.each do |field|
-      customer[field] = nil
-      expect(customer.valid?).must_equal false
-      customer.reload
-    end
+  it "requires name" do
+    customer[:name] = nil
+    expect(customer.valid?).must_equal false
+    customer.reload
   end
+
   describe "relations" do
     it "has many movies" do
       customer.must_respond_to :movies

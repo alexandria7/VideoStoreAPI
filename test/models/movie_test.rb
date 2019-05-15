@@ -10,8 +10,8 @@ describe Movie do
   end
 
   describe "validations" do
-    it "requires title, overview, release_date, and inventory" do
-      required_fields = [:title, :overview, :release_date, :inventory]
+    it "requires title and inventory" do
+      required_fields = [:title, :inventory]
 
       required_fields.each do |field|
         movie[field] = nil
