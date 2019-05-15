@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   # get "movies/show"
   # get "movies/create"
   resources :customers, only: [:index, :show, :create]
-  post "/rentals/check-out", to: "rentals#check_out", as: "check_out"
-  post "/rentals/check-in", to: "rentals#check_in", as: "check_in"
+  post "/rentals/check-out", to: "movies#check_out", as: "check_out"
+  post "/rentals/check-in", to: "movies#check_in", as: "check_in"
   # get "movies/zomg"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
