@@ -4,7 +4,7 @@ describe Rental do
   let(:rental) { rentals(:one) }
 
   it "must be valid" do
-    value(rental).must_be :valid?
+    expect(rental.valid?).must_equal true
   end
   describe "relations" do
     it "can have a customer" do
