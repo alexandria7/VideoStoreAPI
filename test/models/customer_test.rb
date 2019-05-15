@@ -16,4 +16,28 @@ describe Customer do
       customer.reload
     end
   end
+  describe "validations" do
+    it "has many movies" do
+      customer.must_respond_to :movies
+      customer.movies.each do |movie|
+        movie.must_be_kind_of Movie
+      end
+    end
+    it "can have no movie" do
+      customer.rentals.destroy_all
+      customer.must_respond_to :movies
+      expect(customer.movies).must_equal []
+    end
+    it "can have many rentals" do
+      customer.must_respond_to :rentals
+      customer.rentals.each do |rental|
+        rental.must_be_kind_of Rental
+      end
+    end
+    it "can have no rental" do
+      customer.rentals.destroy_all
+      customer.must_respond_to :rentals
+      expect(customer.rentals).must_equal []
+    end
+  end
 end
