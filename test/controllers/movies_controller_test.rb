@@ -39,6 +39,11 @@ describe MoviesController do
   end
 
   describe "show" do
+    it "returns json" do
+      get movie_path(movie.id)
+      expect(response.header["Content-Type"]).must_include "json"
+    end
+
     it "should get show" do
       get movie_path(movie.id)
       must_respond_with :success
@@ -65,7 +70,11 @@ describe MoviesController do
         inventory: 3,
       }
     }
-
+    it "returns json" do
+      post movies_path, params: {movie: movie_data}
+      expect(response.header["Content-Type"]).must_include "json"
+    end
+    
     it "creates a new movie given valid data" do
       expect {
         post movies_path, params: {movie: movie_data}
