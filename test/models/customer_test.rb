@@ -16,7 +16,7 @@ describe Customer do
       customer.reload
     end
   end
-  describe "validations" do
+  describe "relations" do
     it "has many movies" do
       customer.must_respond_to :movies
       customer.movies.each do |movie|
