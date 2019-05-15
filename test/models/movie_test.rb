@@ -31,7 +31,7 @@ describe Movie do
     end
   end
 
-  describe "relationships" do
+  describe "relations" do
     it "has associated rentals" do
       expect(movie).must_respond_to :rentals
       expect(movie.rentals).must_include rental
