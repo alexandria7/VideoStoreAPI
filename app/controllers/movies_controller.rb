@@ -40,6 +40,14 @@ class MoviesController < ApplicationController
   end
 
   def check_in
+    rental = Rental.find_by(rental_params)
+    rental.movie.inventory += 1
+
+    if rental.save
+      render json: rental.as_json(only: [:id, :customer_id, :movie_id]), status: :ok
+    else
+      render json: { ok: false, errors: rental.errors.messages }, status: :bad_request
+    end
   end
 
   # def zomg
