@@ -44,8 +44,13 @@ describe MoviesController do
       must_respond_with :success
     end
 
-    it "returns 404:not_found for an invalid movie" do
+    it "returns 404 and error message for an invalid movie" do
       get movie_path("invalid_id")
+
+      body = JSON.parse(response.body)
+
+      expect(body).must_be_kind_of Hash
+      expect(body).must_include "error_message"
 
       must_respond_with :not_found
     end
@@ -77,7 +82,6 @@ describe MoviesController do
     end
 
     it "returns an error for invalid pet data" do
-      
       movie_data["title"] = nil
 
       expect {
