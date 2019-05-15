@@ -4,6 +4,6 @@ class Movie < ApplicationRecord
   validates :release_date, presence: true
   validates :inventory, presence: true, numericality: true
 
-  #   has_many :rentals
-  #   has_many :customers, through: :rentals
+  has_many :rentals
+  has_many :customers, through: :rentals
 end
