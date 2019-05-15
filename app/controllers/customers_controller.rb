@@ -16,23 +16,10 @@ class CustomersController < ApplicationController
     end
   end
 
-  def create
-    customer = Customer.new(customer_params)
-    if customer.save
-      render json: { id: customer.id }, status: :ok
-    else
-      render json: {
-               errors: {
-                 title: ["could not create '#{customer_params[:name]}' Customer"],
-               },
-               message: customer.error.messages,
-             }, status: :bad_request
-    end
-  end
 
   private
 
   def customer_params
-    params.permit(:id, :name, :registered_at, :address, :city, :state, :postal_code, :phone)
+    params.permit(:id, :name, :registered_at, :postal_code, :phone)
   end
 end
