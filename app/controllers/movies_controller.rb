@@ -26,6 +26,17 @@ class MoviesController < ApplicationController
   end
 
   def check_out
+    rental = Rental.new(rental_params)
+    rental.check_out = Date.today
+    rental.due_date = rental.check_out + 7.days
+
+    rental.movie.inventory -= 1
+
+    if rental.save
+      render json: rental.as_json(only: [:id, :customer_id, :movie_id, :check_out, :due_date]), status: :ok
+    else
+      render json: { ok: false, errors: rental.errors.messages }, status: :bad_request
+    end
   end
 
   def check_in
@@ -39,5 +50,9 @@ class MoviesController < ApplicationController
 
   def movie_params
     params.permit(:title, :overview, :release_date, :inventory)
+  end
+
+  def rental_params
+    params.permit(:customer_id, :movie_id)
   end
 end
