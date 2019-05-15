@@ -25,9 +25,9 @@ class MoviesController < ApplicationController
     end
   end
 
-  def zomg
-    render json: {message: "it works!"}
-  end
+  # def zomg
+  #   render json: {message: "it works!"}
+  # end
 
   private
 
