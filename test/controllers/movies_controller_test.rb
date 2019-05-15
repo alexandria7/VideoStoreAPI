@@ -74,7 +74,7 @@ describe MoviesController do
       post movies_path, params: {movie: movie_data}
       expect(response.header["Content-Type"]).must_include "json"
     end
-    
+
     it "creates a new movie given valid data" do
       expect {
         post movies_path, params: {movie: movie_data}
