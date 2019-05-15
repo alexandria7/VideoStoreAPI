@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   # get "movies/show"
   # get "movies/create"
   resources :customer, only: [:index, :show, :create]
+ 
   
 
   get "movies/zomg"

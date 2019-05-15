@@ -1,7 +1,7 @@
 class CustomersController < ApplicationController
     def index
         customer = Customer.all  
-        render json: customer.as_json(only: [:id, :name, :registered_at, :address, :city, :state, :postal_code, :phone]), status: :ok
+        render json: customer.as_json(only: [:name, :registered_at, :address, :city, :state, :postal_code, :phone]), status: :ok
     end
 
     def show
@@ -32,7 +32,7 @@ class CustomersController < ApplicationController
     end
     
     private
-    
+
     def customer_params
         params.permit(:id, :name, :registered_at, :address, :city, :state, :postal_code, :phone)
     end
