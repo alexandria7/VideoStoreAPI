@@ -44,18 +44,17 @@ describe Movie do
   end
 
   describe "custom methods" do
+    before do
+      @new_movie = Movie.create(title: "Cool Movie", inventory: 5)
+    end
+
     it "returns the same value as inventory" do
-      expect(movie.available_inventory).must_equal movie.inventory
+      expect(@new_movie.available_inventory).must_equal movie.inventory
     end
 
     it "must return an integer" do
-      expect(movie.available_inventory).must_be_kind_of Integer
-      expect(movie.available_inventory).must_equal 5
-    end
-
-    it "can be zero" do
-      movie.inventory = 0
-      expect(movie.available_inventory).must_equal 0
+      expect(@new_movie.available_inventory).must_be_kind_of Integer
+      expect(@new_movie.available_inventory).must_equal 5
     end
   end
 end
