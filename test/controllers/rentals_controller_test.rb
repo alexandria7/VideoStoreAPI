@@ -34,7 +34,7 @@ describe RentalsController do
       must_respond_with :success
     end
 
-    it "should send an error message if given bad information" do
+    it "should send a 404 if given bad information" do
       rental_data[:customer_id] = nil
 
       expect {
@@ -46,6 +46,22 @@ describe RentalsController do
       expect(body).must_be_kind_of Hash
       expect(body).must_include "errors"
       expect(body["errors"]).must_include "customer"
+      must_respond_with :bad_request
+    end
+
+    it "will return an error if a movie has no available_inventory" do
+      movie.available_inventory = 0
+      movie.save
+
+      expect {
+        post check_out_path, params: rental_data
+      }.wont_change "Rental.count"
+
+      body = JSON.parse(response.body)
+
+      expect(body).must_be_kind_of Hash
+      expect(body).must_include "error_message"
+      expect(body["error_message"]).must_include "No available inventory"
       must_respond_with :bad_request
     end
   end
