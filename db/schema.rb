@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_14_221327) do
+ActiveRecord::Schema.define(version: 2019_05_16_162507) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 2019_05_14_221327) do
     t.string "phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "movies_checked_out_count", default: 0
   end
 
   create_table "movies", force: :cascade do |t|
@@ -34,6 +35,7 @@ ActiveRecord::Schema.define(version: 2019_05_14_221327) do
     t.integer "inventory"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "available_inventory"
   end
 
   create_table "rentals", force: :cascade do |t|
@@ -41,6 +43,8 @@ ActiveRecord::Schema.define(version: 2019_05_14_221327) do
     t.bigint "movie_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "check_out"
+    t.datetime "due_date"
     t.index ["customer_id"], name: "index_rentals_on_customer_id"
     t.index ["movie_id"], name: "index_rentals_on_movie_id"
   end
