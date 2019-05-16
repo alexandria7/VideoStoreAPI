@@ -1,5 +1,6 @@
 class Movie < ApplicationRecord
   before_create :set_available_inventory
+
   validates :title, presence: true
   validates :inventory, presence: true, numericality: true
 
