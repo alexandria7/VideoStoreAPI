@@ -19,7 +19,7 @@ describe RentalsController do
       }.must_change "Rental.count", 1
 
       rental = Rental.find_by(customer_id: customer.id, movie_id: movie.id)
-      binding.pry
+   
       date = rental.check_out
 
       expect(rental.movie.available_inventory).must_equal movie_inventory - 1

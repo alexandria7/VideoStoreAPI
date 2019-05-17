@@ -25,6 +25,19 @@ describe Rental do
 
       rental.movie.id.must_equal movie.id
     end
+    describe "custom method" do
+      it "can set the checkout and due date" do
+        customer = customers(:one)
+        movie = movies(:one)
+
+        rental = Rental.new(customer_id: customer.id, movie_id: movie.id)
+        rental.save
+  
+
+        expect(rental.check_out).must_equal Date.today
+        expect(rental.due_date).must_equal Date.today + 7.days
+      end
+    end
 
   end
 end
