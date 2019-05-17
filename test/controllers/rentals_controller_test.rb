@@ -99,22 +99,24 @@ describe RentalsController do
       must_respond_with :success
     end
 
-    it "will respond with a bad_request if given bad rental info" do
-      # body = JSON.parse(response.body)
+    it "will respond with not_found if given bad rental info" do
+      post check_out_path, params: rental_data
 
-      # expect(body).must_be_kind_of Hash
-      # expect(body).must_include "errors"
-      # expect(body["errors"]).must_include ""
-      # must_respond_with :bad_request
-    end
+      movie.reload
+      customer.reload
 
-    it "will respond with a not_found if no rental is found" do
-      # body = JSON.parse(response.body)
+      rental_data[:customer_id] = nil
 
-      # expect(body).must_be_kind_of Hash
-      # expect(body).must_include "errors"
-      # expect(body["errors"]).must_include ""
-      # must_respond_with :not_found
+      expect {
+        post check_in_path, params: rental_data
+      }.wont_change "Rental.count"
+
+      body = JSON.parse(response.body)
+
+      expect(body).must_be_kind_of Hash
+      expect(body).must_include "error_message"
+      expect(body["error_message"]).must_include "Could not find rental"
+      must_respond_with :not_found
     end
   end
 end
