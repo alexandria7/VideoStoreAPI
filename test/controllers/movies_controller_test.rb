@@ -90,7 +90,7 @@ describe MoviesController do
       must_respond_with :success
     end
 
-    it "returns an error for invalid pet data" do
+    it "returns an error for invalid movie data" do
       movie_data["title"] = nil
 
       expect {
