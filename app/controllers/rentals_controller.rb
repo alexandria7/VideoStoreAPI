@@ -25,22 +25,13 @@ class RentalsController < ApplicationController
     rental = Rental.find_by(rental_params)
 
     if rental
-      if rental.save
-        rental.movie.available_inventory += 1
-        rental.movie.save
+      rental.movie.available_inventory += 1
+      rental.movie.save
 
-        if rental.customer.movies_checked_out_count > 0
-          rental.customer.movies_checked_out_count -= 1
-        else
-          rental.customer.movies_checked_out_count = 0
-        end
-        rental.customer.save
+      rental.customer.movies_checked_out_count -= 1
+      rental.customer.save
 
-        render json: rental.as_json(only: [:id, :customer_id, :movie_id]), status: :ok
-      else
-        render json: {ok: false, errors: rental.errors.messages},
-               status: :bad_request
-      end
+      render json: rental.as_json(only: [:id, :customer_id, :movie_id]), status: :ok
     else
       render json: {ok: false, error_message: "Could not find rental"}, status: :not_found
     end
