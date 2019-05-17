@@ -11,6 +11,7 @@ class RentalsController < ApplicationController
         rental.customer.save
         rental.check_out = rental.created_at
         rental.due_date = rental.created_at + 7.days
+        #rental.save
         render json: rental.as_json(only: [:id, :customer_id, :movie_id, :check_out, :due_date]), status: :ok
       else
         render json: {ok: false, errors: rental.errors.messages},

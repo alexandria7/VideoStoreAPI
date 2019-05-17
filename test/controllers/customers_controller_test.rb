@@ -9,6 +9,13 @@ describe CustomersController do
       expect(response.header['Content-Type']).must_include 'json'
       must_respond_with :success
     end
+    it "is a real working route and returns JSON if there are no customer" do
+      Customer.destroy_all
+      get customers_path
+    
+      expect(response.header['Content-Type']).must_include 'json'
+      must_respond_with :success
+    end
     it "returns an Array" do
       get customers_path
     

@@ -19,9 +19,12 @@ describe RentalsController do
       }.must_change "Rental.count", 1
 
       rental = Rental.find_by(customer_id: customer.id, movie_id: movie.id)
+      #binding.pry
+      #date = rental.check_out
 
       expect(rental.movie.available_inventory).must_equal movie_inventory - 1
       expect(rental.customer.movies_checked_out_count).must_equal customer_checked_out_count + 1
+      #expect(rental.due_date).must_equal date + 7.days
 
       body = JSON.parse(response.body)
       expect(body).must_be_kind_of Hash
