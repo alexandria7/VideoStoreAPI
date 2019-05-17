@@ -44,21 +44,5 @@ describe CustomersController do
     end
 
   end
-  # describe "show" do
-  #   it "can get a customer" do
-  #     get customer_path(customers(:one).id)
-  #     must_respond_with :success
-  #   end
-    
-  #   it "responds with a 404 message if no pet is found" do
-  #     id = -1
-  #     get customer_path(id)
-  #     must_respond_with :not_found
-  #   end
-  # end
-
-
-
-
 
 end
