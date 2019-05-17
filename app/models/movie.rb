@@ -4,7 +4,7 @@ class Movie < ApplicationRecord
   validates :title, presence: true
   validates :inventory, presence: true, numericality: true
 
-  has_many :rentals
+  has_many :rentals, dependent: :destroy
   has_many :customers, through: :rentals
 
   def set_available_inventory

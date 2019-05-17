@@ -8,6 +8,19 @@ describe MoviesController do
       must_respond_with :success
     end
 
+    it "should get index if there are no movies" do
+      movies = Movie.all
+
+      movies.each do |movie|
+        movie.destroy
+      end
+
+      get movies_path
+
+      expect(response.header["Content-Type"]).must_include "json"
+      must_respond_with :success
+    end
+
     it "returns json" do
       get movies_path
       expect(response.header["Content-Type"]).must_include "json"
